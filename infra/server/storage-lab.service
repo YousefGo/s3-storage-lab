@@ -1,0 +1,15 @@
+[Unit]
+Description=AWS Storage Lab API
+After=network-online.target
+Wants=network-online.target
+RequiresMountsFor=/data
+
+[Service]
+User=ec2-user
+WorkingDirectory=/home/ec2-user/aws-storage-lab
+Environment=DATA_DIR=/data
+ExecStart=/home/ec2-user/aws-storage-lab/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
