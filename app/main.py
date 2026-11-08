@@ -19,7 +19,9 @@ app.include_router(uploads_router)
 @app.get("/health")
 def health():
     return {"status": "ok", "hostname": socket.gethostname()}
-
+@app.get("/")
+def index():
+    return FileResponse(Path(__file__).parent / "static" / "index.html")
 
 
 @app.post("/files", status_code=201)

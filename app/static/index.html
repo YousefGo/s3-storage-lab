@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Storage Lab Upload</title>
+  <style>
+    body { font-family: system-ui; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+    progress { width: 100%; }
+    pre { background: #f4f4f4; padding: 12px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Upload to S3</h1>
+  <input type="file" id="file">
+  <button id="go">Upload</button>
+  <progress id="bar" max="100" value="0"></progress>
+  <pre id="log"></pre>
+
+<script>
+const log = (m) => document.getElementById('log').textContent += m + '\n';
+
+document.getElementById('go').onclick = async () => {
+  const file = document.getElementById('file').files[0];
+  if (!file) return log('Pick a file first');
+  const type = file.type || 'application/octet-stream';
+
+  // 1. Ask our API for a presigned URL
+  const res = await fetch('/uploads', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ filename: file.name, content_type: type, size_bytes: file.size })
+  });
+  if (!res.ok) return log('1. API error ' + res.status + ' ' + await res.text());
+  const up = await res.json();
+  log(`1. got URL for id=${up.id} (valid ${up.expires_in}s)`);
+
+  // 2. PUT the file straight to S3 (XHR gives upload progress)
+  try {
+    await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', up.upload_url);
+      xhr.setRequestHeader('Content-Type', type);
+      xhr.upload.onprogress = (e) => document.getElementById('bar').value = e.loaded / e.total * 100;
+      xhr.onload = () => xhr.status === 200 ? resolve() : reject(new Error('S3 returned ' + xhr.status));
+      xhr.onerror = () => reject(new Error('Network/CORS error (check the browser console)'));
+      xhr.send(file);
+    });
+  } catch (e) { return log('2. ' + e.message); }
+  log('2. uploaded to S3');
+
+  // 3. Tell our API the upload is done
+  const done = await (await fetch(`/uploads/${up.id}/complete`, { method: 'POST' })).json();
+  log('3. ' + JSON.stringify(done));
+};
+</script>
+</body>
+</html>
