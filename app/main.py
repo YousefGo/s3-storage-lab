@@ -2,7 +2,7 @@ import socket
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
-
+from app.routes.uploads import router as uploads_router
 from fastapi import FastAPI, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from app.config import UPLOAD_DIR, MAX_UPLOAD_BYTES
@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(title="AWS Storage Lab ", lifespan=lifespan)
-
+app.include_router(uploads_router)
 
 @app.get("/health")
 def health():
