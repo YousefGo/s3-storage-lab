@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "UploadsReadWrite",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": "arn:aws:s3:::storage-lab-uploads-882437028576/uploads/*"
+    },
+    {
+      "Sid": "UseProjectKey",
+      "Effect": "Allow",
+      "Action": ["kms:GenerateDataKey", "kms:Decrypt"],
+      "Resource": "arn:aws:kms:us-east-1:882437028576:key/2020a802-ed2d-4c35-9083-416ed2a9d56d"
+    }
+  ]
+}
