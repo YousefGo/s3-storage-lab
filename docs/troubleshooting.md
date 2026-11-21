@@ -1,4 +1,3 @@
-
 # Troubleshooting log
 
 Real problems I hit while building this project, and how I fixed them.
@@ -78,3 +77,18 @@ Real problems I hit while building this project, and how I fixed them.
 - **Symptom:** `aws ec2 describe-volumes-modifications` on the EC2 instance was denied.
 - **Cause:** The instance role has a trust policy but no permission policy.
 - **Lesson:** This is least privilege working. The instance can prove its identity (`sts` works) but cannot touch my infrastructure. Infra commands run from my machine.
+
+
+
+## 12. CLI was using root access keys
+
+**Symptom:** An S3 error showed `User: arn:aws:iam::<account>:root`.
+
+**Cause:** Root keys were in the `[default]` profile; my IAM user `yousef` was in a
+separate `lab` profile that the CLI wasn't using.
+
+**Fix:** `export AWS_PROFILE=lab` in `~/.zshrc`, deleted the root access keys in the
+console, removed `[default]` from `~/.aws/credentials`, confirmed MFA on root.
+
+**Lesson:** Always check `aws sts get-caller-identity` before working.
+Root should have MFA and no access keys.
