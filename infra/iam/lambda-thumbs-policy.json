@@ -1,0 +1,8 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Sid": "ReadUploads",     "Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::storage-lab-uploads-882437028576/uploads/*" },
+    { "Sid": "WriteThumbnails", "Effect": "Allow", "Action": "s3:PutObject", "Resource": "arn:aws:s3:::storage-lab-uploads-882437028576/thumbnails/*" },
+    { "Sid": "UseProjectKey",   "Effect": "Allow", "Action": ["kms:Decrypt", "kms:GenerateDataKey"], "Resource": "arn:aws:kms:us-east-1:882437028576:key/2020a802-ed2d-4c35-9083-416ed2a9d56d" }
+  ]
+}
