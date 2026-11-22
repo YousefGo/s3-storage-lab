@@ -1,0 +1,14 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Sid": "AllowS3UploadsBucket",
+    "Effect": "Allow",
+    "Principal": { "Service": "s3.amazonaws.com" },
+    "Action": "sqs:SendMessage",
+    "Resource": "arn:aws:sqs:us-east-1:882437028576:storage-lab-thumbs",
+    "Condition": {
+      "ArnEquals":    { "aws:SourceArn": "arn:aws:s3:::storage-lab-uploads-882437028576" },
+      "StringEquals": { "aws:SourceAccount": "882437028576" }
+    }
+  }]
+}

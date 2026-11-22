@@ -1,0 +1,10 @@
+{
+  "QueueConfigurations": [
+    { "Id": "jpg",  "QueueArn": "arn:aws:sqs:us-east-1:882437028576:storage-lab-thumbs", "Events": ["s3:ObjectCreated:*"],
+      "Filter": { "Key": { "FilterRules": [ {"Name": "prefix", "Value": "uploads/"}, {"Name": "suffix", "Value": ".jpg"} ] } } },
+    { "Id": "jpeg", "QueueArn": "arn:aws:sqs:us-east-1:882437028576:storage-lab-thumbs", "Events": ["s3:ObjectCreated:*"],
+      "Filter": { "Key": { "FilterRules": [ {"Name": "prefix", "Value": "uploads/"}, {"Name": "suffix", "Value": ".jpeg"} ] } } },
+    { "Id": "png",  "QueueArn": "arn:aws:sqs:us-east-1:882437028576:storage-lab-thumbs", "Events": ["s3:ObjectCreated:*"],
+      "Filter": { "Key": { "FilterRules": [ {"Name": "prefix", "Value": "uploads/"}, {"Name": "suffix", "Value": ".png"} ] } } }
+  ]
+}

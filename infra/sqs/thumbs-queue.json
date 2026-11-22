@@ -1,0 +1,5 @@
+{
+  "VisibilityTimeout": "180",
+  "ReceiveMessageWaitTimeSeconds": "20",
+  "RedrivePolicy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-east-1:882437028576:storage-lab-thumbs-dlq\",\"maxReceiveCount\":\"3\"}"
+}
