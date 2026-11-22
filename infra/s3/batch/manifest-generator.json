@@ -1,0 +1,2 @@
+{"S3JobManifestGenerator":{"SourceBucket":"arn:aws:s3:::storage-lab-uploads-882437028576","EnableManifestOutput":false,
+ "Filter":{"EligibleForReplication":true,"ObjectReplicationStatuses":["NONE","FAILED"]}}}

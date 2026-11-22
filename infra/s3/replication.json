@@ -1,0 +1,7 @@
+{"Role":"arn:aws:iam::882437028576:role/storage-lab-replication",
+ "Rules":[{"ID":"uploads-to-oregon","Priority":1,"Status":"Enabled",
+  "Filter":{"Prefix":"uploads/"},
+  "DeleteMarkerReplication":{"Status":"Disabled"},
+  "SourceSelectionCriteria":{"SseKmsEncryptedObjects":{"Status":"Enabled"}},
+  "Destination":{"Bucket":"arn:aws:s3:::storage-lab-replica-882437028576",
+   "EncryptionConfiguration":{"ReplicaKmsKeyID":"arn:aws:kms:us-west-2:882437028576:key/fe5f9772-b350-4e56-b7e1-790c6e0bcf45"}}}]}

@@ -1,0 +1,5 @@
+{"Version":"2012-10-17","Statement":[
+ {"Effect":"Allow","Action":"s3:InitiateReplication","Resource":"arn:aws:s3:::storage-lab-uploads-882437028576/*"},
+ {"Effect":"Allow","Action":["s3:GetReplicationConfiguration","s3:PutInventoryConfiguration"],"Resource":"arn:aws:s3:::storage-lab-uploads-882437028576"},
+ {"Effect":"Allow","Action":"s3:PutObject","Resource":"arn:aws:s3:::storage-lab-uploads-882437028576/batch-reports/*"},
+ {"Effect":"Allow","Action":"kms:GenerateDataKey","Resource":"arn:aws:kms:us-east-1:882437028576:key/2020a802-ed2d-4c35-9083-416ed2a9d56d"}]}
