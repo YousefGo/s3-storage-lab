@@ -4,4 +4,5 @@ __pycache__/
 *.pem
 data/
 .terraform/
-*.tfstate*build/
+*.tfstate*
+build/
