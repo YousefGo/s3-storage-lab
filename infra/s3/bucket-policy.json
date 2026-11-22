@@ -6,11 +6,16 @@
       "Effect": "Deny",
       "Principal": "*",
       "Action": "s3:*",
-      "Resource": [
-        "arn:aws:s3:::storage-lab-uploads-882437028576",
-        "arn:aws:s3:::storage-lab-uploads-882437028576/*"
-      ],
+      "Resource": ["arn:aws:s3:::storage-lab-uploads-882437028576", "arn:aws:s3:::storage-lab-uploads-882437028576/*"],
       "Condition": { "Bool": { "aws:SecureTransport": "false" } }
+    },
+    {
+      "Sid": "AllowCloudFrontOAC",
+      "Effect": "Allow",
+      "Principal": { "Service": "cloudfront.amazonaws.com" },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::storage-lab-uploads-882437028576/*",
+      "Condition": { "StringEquals": { "aws:SourceArn": "arn:aws:cloudfront::882437028576:distribution/E1NLA3C4ABR5VD" } }
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "Version": "2012-10-17",
+  "Id": "key-default-1",
+  "Statement": [
+    {
+      "Sid": "Enable IAM User Permissions",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::882437028576:root"
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowCloudFrontDecrypt",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
+      "Action": "kms:Decrypt",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceArn": "arn:aws:cloudfront::882437028576:distribution/E1NLA3C4ABR5VD"
+        }
+      }
+    }
+  ]
+}

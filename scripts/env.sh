@@ -7,3 +7,7 @@ export Q_URL=$(aws sqs get-queue-url --queue-name storage-lab-thumbs --query Que
 export DLQ_URL=$(aws sqs get-queue-url --queue-name storage-lab-thumbs-dlq --query QueueUrl --output text)
 echo "BUCKET=$BUCKET"
 echo "Q_URL=$Q_URL"
+export DIST_ID=E1NLA3C4ABR5VD
+export CF_DOMAIN=drzdkuu1s0goo.cloudfront.net
+export KEY_ID=2020a802-ed2d-4c35-9083-416ed2a9d56d
+export OAC_ID=E2KZFXC87TBER7

@@ -14,7 +14,9 @@ Python · FastAPI · SQLite · boto3 · AWS CLI · Nginx · systemd · Linux
 | Phase | Topic                                         | Status  | Docs                                |
 | ----- | --------------------------------------------- | ------- | ----------------------------------- |
 | 1     | EC2 + EBS (encryption, snapshots, DR, resize) | ✅ Done | [phase-01](docs/phase-01-ec2-ebs.md) |
-| 2     | S3                                            | ⏳ Next | —                                  |
+| 2     | S3 (direct upload, KMS, versioning, Glacier, multipart) | ✅ Done | [phase-02](docs/phase-02-s3.md) |
+| 3     | Events (S3 → SQS → Lambda, DLQ) | ✅ Done | [phase-03](docs/phase-03-events.md) |
+| 4     | CloudFront + OAC (SSE-KMS origin, cache, invalidation) | ✅ Done | [phase-04](docs/phase-04-cloudfront.md) |
 
 ## How each phase is documented
 

@@ -92,3 +92,21 @@ console, removed `[default]` from `~/.aws/credentials`, confirmed MFA on root.
 
 **Lesson:** Always check `aws sts get-caller-identity` before working.
 Root should have MFA and no access keys.
+
+## 15. Variables empty in a new terminal (`s3:///uploads/...`, `--queue-url: expected one argument`)
+
+**Fix:** `scripts/env.sh` exports every ID; run `source scripts/env.sh` (or the `lab` alias) first in each terminal.
+`source` keeps variables in the current shell; `./env.sh` would run in a child shell and lose them.
+
+## 16. Verify script failed: `OSError: image file is truncated`
+
+**Cause:** the test image was a hand-written base64 JPEG that was invalid. The Lambda was fine.
+**Fix:** generate a real image with Pillow in the script. Lesson: test data can be the bug.
+
+## 17. CloudFront 403 although bucket and key policies were correct
+
+**Cause:** `OriginAccessControlId` was empty in the distribution — `$OAC_ID` was unset
+when `distribution.json` was written, so CloudFront sent unsigned requests.
+**Diagnose:** `aws cloudfront get-distribution-config --id $DIST_ID --query 'DistributionConfig.Origins.Items[0].OriginAccessControlId'`
+**Fix:** get config + ETag, set the OAC ID, `update-distribution --if-match $ETAG`.
+**Lesson:** `echo` every variable before writing it into a config file.
