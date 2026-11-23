@@ -110,3 +110,7 @@ when `distribution.json` was written, so CloudFront sent unsigned requests.
 **Diagnose:** `aws cloudfront get-distribution-config --id $DIST_ID --query 'DistributionConfig.Origins.Items[0].OriginAccessControlId'`
 **Fix:** get config + ETag, set the OAC ID, `update-distribution --if-match $ETAG`.
 **Lesson:** `echo` every variable before writing it into a config file.
+
+## 18. `Invalid Role specified in replication configuration`
+**Cause:** in zsh, `$ACCOUNT:role` → `:r` is a history modifier, so the ARN became `arn:aws:iam::882437028576ole/...`.
+**Fix:** always brace variables before `:` → `${ACCOUNT}:role`. Check with `grep -o '"Role":"[^"]*"' file.json`.
