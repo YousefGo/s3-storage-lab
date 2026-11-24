@@ -1,0 +1,6 @@
+{"BackupPlanName":"storage-lab-daily","Rules":[{
+  "RuleName":"daily-3am-riyadh","TargetBackupVaultName":"storage-lab-vault",
+  "ScheduleExpression":"cron(0 0 * * ? *)","StartWindowMinutes":60,"CompletionWindowMinutes":180,
+  "Lifecycle":{"DeleteAfterDays":7},
+  "CopyActions":[{"DestinationBackupVaultArn":"arn:aws:backup:us-west-2:882437028576:backup-vault:storage-lab-vault-dr",
+                  "Lifecycle":{"DeleteAfterDays":7}}]}]}

@@ -114,3 +114,11 @@ when `distribution.json` was written, so CloudFront sent unsigned requests.
 ## 18. `Invalid Role specified in replication configuration`
 **Cause:** in zsh, `$ACCOUNT:role` → `:r` is a history modifier, so the ARN became `arn:aws:iam::882437028576ole/...`.
 **Fix:** always brace variables before `:` → `${ACCOUNT}:role`. Check with `grep -o '"Role":"[^"]*"' file.json`.
+
+## 19. DataSync `x40016: Could not mount subdirectory /from-s3`
+**Cause:** the EFS subdirectory did not exist; DataSync doesn't create it.
+**Fix:** `sudo mkdir -p /mnt/efs/from-s3` from a client, then re-run. Read `describe-task-execution --query Result` first.
+
+## 20. Verify script picked a failed run
+**Cause:** assumed `list-task-executions` is ordered (`[-1]`).
+**Fix:** filter: `TaskExecutions[?Status=='SUCCESS'] | [0].Status`.

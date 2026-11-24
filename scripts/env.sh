@@ -20,3 +20,5 @@ export EFS_SG=sg-08fc8bf1c04c234c7
 export EFS_ID=fs-0c44ba46a0d40d6bf
 export EC2_SUBNET=subnet-02a52a4fdb1fe1207
 export OTHER_SUBNET=subnet-05298b6dd45954dcc
+export PLAN_ID=528b1b0e-2db3-40fc-a01b-b3c7cd74af12
+export DS_TASK=arn:aws:datasync:us-east-1:882437028576:task/task-0035c437b95d9446e

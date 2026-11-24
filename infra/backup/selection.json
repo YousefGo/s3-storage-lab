@@ -1,0 +1,3 @@
+{"SelectionName":"efs-ebs-by-tag","IamRoleArn":"arn:aws:iam::882437028576:role/storage-lab-backup",
+ "Resources":["arn:aws:elasticfilesystem:*:*:file-system/*","arn:aws:ec2:*:*:volume/*"],
+ "Conditions":{"StringEquals":[{"ConditionKey":"aws:ResourceTag/Project","ConditionValue":"storage-lab"}]}}
